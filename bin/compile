@@ -20,13 +20,13 @@ CACHE_DIR=$2
 ENV_DIR=$3
 TARGET_DIR=$BUILD_DIR
 
-echo $BUILD_DIR
+echo 'BUILD_DIR: '$BUILD_DIR
 
 cd $BUILD_DIR
 
 write_export() {
     echo 'export PATH="'${TARGET_DIR}'/gettext/bin:$PATH"' > $BP_DIR/export
-    echo $BP_DIR'/export:'
+    echo 'BP_DIR/export: '$BP_DIR'/export:'
     cat $BP_DIR/export
 }
 
@@ -41,9 +41,6 @@ if [ -d $TARGET_DIR/gettext ]; then
 	export_gettext_to_path
 	exit 0
 fi
-
-write_export
-exit 0
 
 echo "-----> Installing gettext..."
 curl --silent --max-time 60 --location "$GETTEXT_TARBALL" | tar xz
