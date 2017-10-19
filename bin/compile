@@ -27,3 +27,6 @@ make
 make check
 make install
 echo "-----> done in $TARGET_DIR/gettext"
+
+export PATH=$HOME/gettext/bin:$PATH
+set_env PATH "\$HOME/gettext/bin:\$PATH"
