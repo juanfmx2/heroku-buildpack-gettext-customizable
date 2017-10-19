@@ -4,10 +4,10 @@
 set -e
 
 GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
-TARGET_DIR=$HOME
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
+TARGET_DIR=$BUILD_DIR
 
 cd $BUILD_DIR
 
