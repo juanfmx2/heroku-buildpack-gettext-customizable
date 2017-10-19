@@ -10,8 +10,15 @@ CACHE_DIR=$2
 
 cd $BUILD_DIR
 
+export_gettext_to_path(){
+    printf ':$HOME/gettext/bin' >> $ENV_DIR
+    echo 'ENV_DIR:'
+    cat $ENV_DIR
+}
+
 if [ -d $TARGET_DIR/gettext ]; then
 	echo "$TARGET_DIR/gettext already installed"
+	export_gettext_to_path
 	exit 0
 fi
 
@@ -28,5 +35,4 @@ make check
 make install
 echo "-----> done in $TARGET_DIR/gettext"
 
-export PATH=$HOME/gettext/bin:$PATH
-set_env PATH "\$HOME/gettext/bin:\$PATH"
+export_gettext_to_path
