@@ -12,6 +12,8 @@ ENV_DIR=$3
 cd $BUILD_DIR
 
 export_gettext_to_path(){
+    echo 'ls -la $HOME/gettext/bin:'
+    ls -la $HOME/gettext/bin
     printf ':$HOME/gettext/bin' >> $ENV_DIR
     echo 'ENV_DIR:'
     cat $ENV_DIR
