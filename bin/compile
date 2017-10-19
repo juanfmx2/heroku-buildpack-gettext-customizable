@@ -18,7 +18,9 @@ GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-TARGET_DIR=$HOME
+TARGET_DIR=$BUILD_DIR
+
+echo $BUILD_DIR
 
 cd $BUILD_DIR
 
