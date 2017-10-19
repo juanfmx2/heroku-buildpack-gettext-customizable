@@ -17,7 +17,7 @@ fi
 
 echo "-----> Installing gettext..."
 curl --silent --max-time 60 --location "$GETTEXT_TARBALL" | tar xz
-cd $(find -X . -name 'gettext*' -maxdepth 1) 
+cd $(find . -name 'gettext*' -maxdepth 1) 
 sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in
 sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
 mkdir $TARGET_DIR/gettext
