@@ -18,11 +18,11 @@ GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-TARGET_DIR=$BUILD_DIR
+TARGET_DIR=$CACHE_DIR
 
-echo 'BUILD_DIR: '$BUILD_DIR
+echo 'TARGET_DIR: '$TARGET_DIR
 
-cd $BUILD_DIR
+cd $TARGET_DIR
 
 write_export() {
     echo 'export PATH="'${TARGET_DIR}'/gettext/bin:$PATH"' > $BP_DIR/export
@@ -36,8 +36,8 @@ export_gettext_to_path(){
     write_export
 }
 
-if [ -d $TARGET_DIR/gettext ]; then
-	echo "$TARGET_DIR/gettext already installed"
+if [ -d $TARGET_DIR/gettext/bin ]; then
+	echo "$TARGET_DIR/gettext/bin already installed"
 	export_gettext_to_path
 	exit 0
 fi
