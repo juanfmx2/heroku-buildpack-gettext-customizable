@@ -28,6 +28,7 @@ write_export() {
     echo 'export PATH="'${TARGET_DIR}'/gettext/bin:$PATH"' > $BP_DIR/export
     echo 'BP_DIR/export: '$BP_DIR'/export:'
     cat $BP_DIR/export
+    cp -r ${TARGET_DIR}'/gettext' $HOME
 }
 
 export_gettext_to_path(){
