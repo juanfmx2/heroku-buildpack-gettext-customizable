@@ -40,6 +40,9 @@ if [ -d $TARGET_DIR/gettext ]; then
 	exit 0
 fi
 
+write_export
+exit 0
+
 echo "-----> Installing gettext..."
 curl --silent --max-time 60 --location "$GETTEXT_TARBALL" | tar xz
 cd $(find . -name 'gettext*' -maxdepth 1) 
