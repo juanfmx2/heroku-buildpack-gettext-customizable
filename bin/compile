@@ -13,7 +13,7 @@ echo "SCRIPT LOCATION: "$DIR
 
 set -e
 
-BP_DIR=$DIR
+BP_DIR=$DIR/..
 GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -26,7 +26,7 @@ cd $BUILD_DIR
 
 write_export() {
     echo 'export PATH="'${TARGET_DIR}'/gettext/bin:$PATH"' > $BP_DIR/export
-    echo 'BP_DIR/export:'
+    echo $BP_DIR'/export:'
     cat $BP_DIR/export
 }
 
