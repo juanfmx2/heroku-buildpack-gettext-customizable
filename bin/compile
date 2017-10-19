@@ -7,6 +7,7 @@ GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
 TARGET_DIR=$HOME
 BUILD_DIR=$1
 CACHE_DIR=$2
+ENV_DIR=$3
 
 cd $BUILD_DIR
 
@@ -25,14 +26,15 @@ fi
 echo "-----> Installing gettext..."
 curl --silent --max-time 60 --location "$GETTEXT_TARBALL" | tar xz
 cd $(find . -name 'gettext*' -maxdepth 1) 
-sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in
+sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in &&
 sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
 mkdir $TARGET_DIR/gettext
 mkdir $TARGET_DIR/gettext-docs
-./configure --prefix=$TARGET_DIR/gettext --disable-static --docdir=$TARGET_DIR/gettext-docs
-make
-make check
-make install
+./configure --prefix=$TARGET_DIR/gettext --disable-static --docdir=$TARGET_DIR/gettext-docs &&
+make &&
+make check &&
+make install ||
+(echo "-----> BUILD FAILED" && exit 1)
 echo "-----> done in $TARGET_DIR/gettext"
 
 export_gettext_to_path
