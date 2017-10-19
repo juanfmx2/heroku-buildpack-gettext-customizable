@@ -7,14 +7,14 @@ GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-TARGET_DIR=$BUILD_DIR
+TARGET_DIR=$HOME
 
 cd $BUILD_DIR
 
 export_gettext_to_path(){
-    echo 'ls -la $HOME/gettext/bin:'
-    ls -la $HOME/gettext/bin
-    printf ':$HOME/gettext/bin' >> ${ENV_DIR}/PATH
+    echo 'ls -la $TARGET_DIR/gettext/bin:'
+    ls -la $TARGET_DIR/gettext/bin
+    printf ':'${TARGET_DIR}'/gettext/bin:' >> ${ENV_DIR}/PATH
     echo 'ENV_DIR/PATH:'
     cat ${ENV_DIR}/PATH
 }
