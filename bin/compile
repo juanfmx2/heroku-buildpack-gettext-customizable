@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
+# Resolves in which directory is this file located so it does not matter from which path it is being called
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+export DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+echo "SCRIPT LOCATION: "$DIR
+
 set -e
 
+BP_DIR=$DIR
 GETTEXT_TARBALL=http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -11,12 +22,16 @@ TARGET_DIR=$HOME
 
 cd $BUILD_DIR
 
+write_export() {
+    echo 'export PATH="'${TARGET_DIR}'/gettext/bin:$PATH"' > $BP_DIR/export
+    echo 'BP_DIR/export:'
+    cat $BP_DIR/export
+}
+
 export_gettext_to_path(){
-    echo 'ls -la $TARGET_DIR/gettext/bin:'
+    echo 'ls -la '$TARGET_DIR'/gettext/bin:'
     ls -la $TARGET_DIR/gettext/bin
-    printf ':'${TARGET_DIR}'/gettext/bin:' >> ${ENV_DIR}/PATH
-    echo 'ENV_DIR/PATH:'
-    cat ${ENV_DIR}/PATH
+    write_export
 }
 
 if [ -d $TARGET_DIR/gettext ]; then
