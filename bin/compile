@@ -14,7 +14,7 @@ cd $BUILD_DIR
 export_gettext_to_path(){
     echo 'ls -la $HOME/gettext/bin:'
     ls -la $HOME/gettext/bin
-    printf ':$HOME/gettext/bin' >> $ENV_DIR
+    printf ':$HOME/gettext/bin' >> ${ENV_DIR}/PATH
     echo 'ENV_DIR:'
     cat $ENV_DIR
 }
